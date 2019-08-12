@@ -1,0 +1,9 @@
+How to create a virtual env. using python3:
+virtualenv -p python3 env
+
+How to remove a virtual env.:
+Deactivate the env.
+rm -rf env_name
+
+How to activate the env:
+source ~/PycharmProjects/python_training/env/bin/activate
