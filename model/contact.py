@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 class Contact:
 
     def __init__(self, firstname, middlename, lastname, nickname, company, address, email):
