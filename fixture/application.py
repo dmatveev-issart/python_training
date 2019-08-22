@@ -14,6 +14,12 @@ class Application:
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
 
+    def fill_text_field(self, text_field_name, text_field_value):
+        wd = self.wd
+        wd.find_element_by_name(text_field_name).click()
+        wd.find_element_by_name(text_field_name).clear()
+        wd.find_element_by_name(text_field_name).send_keys(text_field_value)
+
     def destroy(self):
         self.wd.quit()
 

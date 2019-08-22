@@ -11,48 +11,54 @@ class GroupHelper:
         wd.find_element_by_link_text("group page").click()
 
     def create(self, group):
-        wd = self.app.wd
         self.open_groups_page()
         # init group creation
-        wd.find_element_by_name("new").click()
+        self.click_new_group()
         # fill group form
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name)
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer)
+        self.app.fill_text_field("group_name", group.name)
+        self.app.fill_text_field("group_header", group.header)
+        self.app.fill_text_field("group_footer", group.footer)
         # submit group creation
-        wd.find_element_by_name("submit").click()
+        self.click_enter_information()
         self.return_to_groups_page()
 
-    def modify(self, group):
+    def click_enter_information(self):
         wd = self.app.wd
+        wd.find_element_by_name("submit").click()
+
+    def click_new_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("new").click()
+
+    def modify(self, group):
         self.open_groups_page()
-        wd.find_element_by_name("selected[]").click()
-        wd.find_element_by_name("edit").click()
+        self.click_first_group()
+        self.click_edit_group()
         # fill group form
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name)
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer)
+        self.app.fill_text_field("group_name", group.name)
+        self.app.fill_text_field("group_header", group.header)
+        self.app.fill_text_field("group_footer", group.footer)
         # submit group modification
-        wd.find_element_by_name("update").click()
+        self.click_update()
         self.return_to_groups_page()
+
+    def click_update(self):
+        wd = self.app.wd
+        wd.find_element_by_name("update").click()
+
+    def click_edit_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("edit").click()
+
+    def click_first_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
 
     def delete_first_group(self):
         wd = self.app.wd
         self.open_groups_page()
         # select first group
-        wd.find_element_by_name("selected[]").click()
+        self.click_first_group()
         # submit deletion
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()

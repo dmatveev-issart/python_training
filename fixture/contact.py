@@ -11,65 +11,46 @@ class ContactHelper:
         wd.find_element_by_link_text("home").click()
 
     def create(self, contact):
-        wd = self.app.wd
         self.open_add_new_page()
         # fill contact form
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.middlename)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.lastname)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(contact.nickname)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(contact.company)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(contact.address)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(contact.email)
-        # submit contact creation
-        wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        # return to home page
+        self.app.fill_text_field("firstname", contact.firstname)
+        self.app.fill_text_field("middlename", contact.middlename)
+        self.app.fill_text_field("lastname", contact.lastname)
+        self.app.fill_text_field("nickname", contact.nickname)
+        self.app.fill_text_field("company", contact.company)
+        self.app.fill_text_field("address", contact.address)
+        self.app.fill_text_field("email", contact.email)
+        self.submit_contact_creation()
         self.return_to_home_page()
+
+    def submit_contact_creation(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
     def modify(self, contact):
         wd = self.app.wd
         self.app.open_home_page()
         # click pencil icon
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.click_edit()
         # fill contact form
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.middlename)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.lastname)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(contact.nickname)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(contact.company)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(contact.address)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(contact.email)
+        self.app.fill_text_field("firstname", contact.firstname)
+        self.app.fill_text_field("middlename", contact.middlename)
+        self.app.fill_text_field("lastname", contact.lastname)
+        self.app.fill_text_field("nickname", contact.nickname)
+        self.app.fill_text_field("company", contact.company)
+        self.app.fill_text_field("address", contact.address)
+        self.app.fill_text_field("email", contact.email)
         # click update button
-        wd.find_element_by_xpath("//div[@id='content']/form/input[22]").click()
+        self.click_update()
         self.app.open_home_page()
+
+    def click_update(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//div[@id='content']/form/input[22]").click()
+
+    def click_edit(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
 
     def open_add_new_page(self):
         wd = self.app.wd
