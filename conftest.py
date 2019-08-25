@@ -8,7 +8,7 @@ fixture = None
 @pytest.fixture
 def app(request):
     global fixture
-    if fixture in None:
+    if fixture is None:
         fixture = Application()
         fixture.session.login(username="admin", password="secret")
     else:
