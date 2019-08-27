@@ -8,7 +8,8 @@ class ContactHelper:
 
     def return_to_home_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("/edit.php") and (wd.find_element_by_xpath("//*[text()='Information entered into address book.']") == True)):
+        #if not (wd.current_url.endswith("/edit.php") and (wd.find_element_by_xpath("//*[text()='Information entered into address book.']") == True)):
+        if not (wd.current_url.endswith("/edit.php") and (wd.find_element_by_xpath("//*[contains(text(), 'Information entered into address book.')]") == True)):
             wd.find_element_by_link_text("home").click()
 
     def create(self, contact):
