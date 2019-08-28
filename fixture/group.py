@@ -8,11 +8,7 @@ class GroupHelper:
 
     def return_to_groups_page(self):
         wd = self.app.wd
-        if (wd.current_url.endswith("/group.php") and (wd.find_elements_by_xpath("//*[contains(text(), 'A new group has been entered into the address book.')]"))):
-            return
-        elif (wd.current_url.endswith("/group.php") and (wd.find_elements_by_xpath("//*[contains(text(), 'Group record has been updated.')]"))):
-            return
-        else:
+        if not (wd.current_url.endswith("/group.php") and (wd.find_element_by_link_text("group page"))):
             wd.find_element_by_link_text("group page").click()
 
     def create(self, group):
