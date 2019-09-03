@@ -71,7 +71,8 @@ class ContactHelper:
         self.return_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-    def get_contact_list(self):
+    # this is the first version
+    """def get_contact_list(self):
         wd = self.app.wd
         self.app.open_home_page()
         contacts = []
@@ -80,7 +81,43 @@ class ContactHelper:
             id = element.get_attribute("value")
             contacts.append(Contact(name=text, id=id))
         print(contacts)
+        return contacts"""
+
+    # this is the second version
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        contacts = []
+        counter = 2
+        for element in wd.find_elements_by_name("entry"):
+            lastname = element.find_element_by_xpath(
+                "/html/body/div/div[4]/form[2]/table/tbody/tr[{}]/td[2]".format(counter)).text
+            firstname = element.find_element_by_xpath(
+                "/html/body/div/div[4]/form[2]/table/tbody/tr[{}]/td[3]".format(counter)).text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            cont = Contact(firstname=firstname, lastname=lastname, id=id)
+            contacts.append(cont)
+            counter = counter + 1
+            print(" firstname= " + cont.firstname + " lastname= " + cont.lastname + " id= " + cont.id)
+        # print(contacts)
         return contacts
+
+    # this is the test function for developing
+    """def test_get_contact_list(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        contacts = []
+        counter = 2
+        for element in wd.find_elements_by_name("entry"):
+            lastname = element.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[{}]/td[2]".format(counter)).text
+            firstname = element.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[{}]/td[3]".format(counter)).text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            cont = Contact(firstname=firstname, lastname=lastname, id=id)
+            contacts.append(cont)
+            counter = counter + 1
+            print(" firstname= " + cont.firstname + " lastname= " + cont.lastname + " id= " + cont.id)
+        #print(contacts)
+        return contacts"""
 
 
 
