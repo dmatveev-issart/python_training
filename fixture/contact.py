@@ -39,17 +39,25 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def modify_first_contact(self, new_contact_data):
+    def modify_first_contact(self):
+        self.modify_contact_by_index(0)
+
+
+    def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         self.app.open_home_page()
-        # click pencil icon
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        # click pencil icon by index
+        self.click_pencil_icon_by_index(index)
         # fill contact form
         self.fill_contact_form(new_contact_data)
         # click update button
         wd.find_element_by_xpath("//div[@id='content']/form/input[22]").click()
         self.app.open_home_page()
         self.contact_cache = None
+
+    def click_pencil_icon_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
     def open_add_new_page(self):
         wd = self.app.wd
