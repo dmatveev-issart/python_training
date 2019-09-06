@@ -17,7 +17,7 @@ def test_mod_contact(app):
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
 
-'''def test_modify_contact_firstname(app):
+"""def test_modify_contact_firstname(app):
     if app.contact.count() == 0:
         app.contact.create(Contact(firstname="denis", middlename="sergeevich", lastname="matveev", nickname="dmatveev", company="issart", address="omsk", email="dmatveev@issart.com"))
     app.contact.modify_first_contact(Contact(firstname="New firstname"))
@@ -26,4 +26,4 @@ def test_mod_contact(app):
 def test_modify_contact_lastname(app):
     if app.contact.count() == 0:
         app.contact.create(Contact(firstname="denis", middlename="sergeevich", lastname="matveev", nickname="dmatveev", company="issart", address="omsk", email="dmatveev@issart.com"))
-    app.contact.modify_first_contact(Contact(lastname="New lastname"))'''
+    app.contact.modify_first_contact(Contact(lastname="New lastname"))"""
