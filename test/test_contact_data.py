@@ -2,7 +2,6 @@
 from model.contact import Contact
 from random import randrange
 import re
-from test.test_phones import merge_phones_like_on_home_page
 
 
 def test_some_contact_data(app):
@@ -19,6 +18,10 @@ def test_some_contact_data(app):
     assert contact_from_home_page.all_phones_from_home_page == merge_phones_like_on_home_page(contact_from_edit_page)
 
 
+def clear_phones(s):
+    return re.sub("[() -]", "", s)
+
+
 def clear_email(s):
         return s
 
@@ -27,5 +30,12 @@ def merge_emails_like_on_home_page(contact):
         return "\n".join(filter(lambda x: x != "",
                                 map(lambda x: clear_email(x),
                                     filter(lambda x: x is not None, [contact.email, contact.email2, contact.email3]))))
+
+
+def merge_phones_like_on_home_page(contact):
+    return "\n".join(filter(lambda x: x != "",
+                            map(lambda x: clear_phones(x),
+                                filter(lambda x: x is not None,
+                                       [contact.homephone, contact.mobilephone, contact.workphone, contact.secondaryphone]))))
 
 
