@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import getopt
 import sys
-import json
+import jsonpickle
 from model.group import Group
 import random
 import string
@@ -23,17 +23,11 @@ for o, a in opts:
     elif o == "-f":
         f = a
 
+
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    # symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    symbols = string.ascii_letters + string.digits
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
-
-
-"""testdata = [
-    Group(name=name, header=header, footer=footer)
-    for name in ["", random_string("name", 10)]
-    for header in ["", random_string("header", 20)]
-    for footer in ["", random_string("footer", 20)]
-]"""
 
 
 testdata = [Group(name="", header="", footer="")] + [
@@ -44,4 +38,5 @@ testdata = [Group(name="", header="", footer="")] + [
 file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
 
 with open(file, "w") as out:
-    out.write(json.dumps(testdata, default=lambda x: x.__dict__, indent=2))
+    jsonpickle.set_encoder_options("json", indent=2)
+    out.write(jsonpickle.encode(testdata))
