@@ -6,7 +6,8 @@ import re
 
 def test_some_contact_data(app):
     if app.contact.count() == 0:
-        app.contact.create(Contact(firstname="denis", middlename="sergeevich", lastname="matveev", nickname="dmatveev", company="issart", address="omsk", email="dmatveev@issart.com"))
+        app.contact.create(Contact(firstname="denis", middlename="sergeevich", lastname="matveev", nickname="dmatveev",
+                                   company="issart", address="omsk", email="dmatveev@issart.com"))
     index = randrange(len(app.contact.get_contact_list()))
     contact_from_home_page = app.contact.get_contact_list()[index]
     contact_from_edit_page = app.contact.get_contact_info_from_edit_page(index)

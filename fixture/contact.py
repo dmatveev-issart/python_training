@@ -61,6 +61,22 @@ class ContactHelper:
         self.app.open_home_page()
         self.contact_cache = None
 
+    def modify_contact_by_id(self, id, new_contact_data):
+        wd = self.app.wd
+        self.app.open_home_page()
+        # click pencil icon by index
+        self.click_pencil_icon_by_id(id)
+        # fill contact form
+        self.fill_contact_form(new_contact_data)
+        # click update button
+        wd.find_element_by_xpath("//div[@id='content']/form/input[22]").click()
+        self.app.open_home_page()
+        self.contact_cache = None
+
+    def click_pencil_icon_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath('//a[@href="edit.php?id=%s"]' % id).click()
+
     def click_pencil_icon_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
@@ -84,6 +100,22 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.app.open_home_page()
         self.contact_cache = None
+
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        # select first contact
+        self.select_contact_by_id(id)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # submit pop-up confirmation window
+        wd.switch_to_alert().accept()
+        self.app.open_home_page()
+        self.contact_cache = None
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath('//td/input[@value="%s"]' % id).click()
 
     def select_contact_by_index(self, index):
         wd = self.app.wd
