@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.contact import Contact
 import re
+import time
 
 
 class ContactHelper:
@@ -121,6 +122,10 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
     def count(self):
         wd = self.app.wd
         self.return_to_home_page()
@@ -187,3 +192,18 @@ class ContactHelper:
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, workphone=workphone,
                        mobilephone=mobilephone, secondaryphone=secondaryphone)
+
+    def add_first_contact_to_group(self):
+        wd = self.app.wd
+        self.return_to_home_page()
+        time.sleep(1)
+        self.select_first_contact()
+        time.sleep(1)
+        wd.find_element_by_name("add").click()
+
+    def add_contact_to_group_by_id(self, id):
+        wd = self.app.wd
+        self.return_to_home_page()
+        self.select_contact_by_id(id)
+        wd.find_element_by_name("add").click()
+

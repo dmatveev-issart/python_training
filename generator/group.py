@@ -35,11 +35,11 @@ testdata = [Group(name=random_string("name", 10), header=random_string("header",
     for i in range(n)]
 
 
-    # with empty group:
-"""testdata = [Group(name="", header="", footer="")] + [
-    Group(name=random_string("name", 10), header=random_string("header", 20), footer=random_string("footer", 20))
-    for i in range(n)
-]"""
+# with empty group:
+# testdata = [Group(name="", header="", footer="")] + [
+#     Group(name=random_string("name", 10), header=random_string("header", 20), footer=random_string("footer", 20))
+#     for i in range(n)
+# ]
 
 file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
 
