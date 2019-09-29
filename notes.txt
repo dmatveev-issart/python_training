@@ -7,3 +7,15 @@ rm -rf env_name
 
 How to activate the env:
 source ~/PycharmProjects/python_training/env/bin/activate
+
+Xpath testing in FireFox:
+$x('//td/input[@value="228"]')
+
+Multistring commenting/uncommenting:
+Select a snippet and press Ctrl + /
+
+How to undo all uncommitted code changes:
+git stash list
+git add . (probably it's optional)
+git stash
+git stash drop
